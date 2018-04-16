@@ -1,10 +1,10 @@
 from flask import url_for, send_from_directory
 from flask import Flask, request, redirect
 from werkzeug.utils import secure_filename
+from werkzeug.wrappers import Request, Response
 import os
 
-
-UPLOAD_FOLDER = 'C:/Users/vsrag/Documents/Projects, Papers and Presentations/SILAI/Programs/test'
+UPLOAD_FOLDER = 'C:/Users/vsrag/Documents/Projects, Papers and Presentations/SILAI/Programs/uploads'
 ALLOWED_EXTENSIONS = set(['png;', 'jpg','jpeg'])
 
 app = Flask(__name__)
@@ -43,6 +43,9 @@ def upload_file():
     </form>
     '''
 
-@app.route('/uploads/,filenmae>')
+@app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+if __name__ == '__main__':
+    app.run(host='localhost', debug=True)
