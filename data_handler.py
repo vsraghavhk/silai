@@ -13,11 +13,6 @@ TRAIN_FILE = "train.p"                         # rm 1
 VALID_FILE = "validate.p"                      # rm 1
 TEST_FILE = "test.p"                           # rm 1
 
-'''
-train_data = "C:/Users/vsrag/Documents/Projects, Papers and Presentations/SILAI/Datasets/Idols/train"
-val_data = "C:/Users/vsrag/Documents/Projects, Papers and Presentations/SILAI/Datasets/Idols/validate"
-test_data = "C:/Users/vsrag/Documents/Projects, Papers and Presentations/SILAI/Datasets/Idols/test"
-'''
 def get_data(folder):
     """
         Load traffic sign data
@@ -43,12 +38,10 @@ def get_data(folder):
     x_train, y_train = train[0], train[1]
     x_valid, y_valid = valid[0], valid[1]
     x_test, y_test = test[0], test[1]
-    print("X shape at data handler : ", x_test.shape)
-    print("Y shape at data handler : ", y_test.shape)
+    # print("X shape at data handler : ", x_test.shape)
+    # print("Y shape at data handler : ", y_test.shape)
+    # print("X type at data handler : ", type(x_test))
+    # print("Y type at data handler : ", type(y_test))
+
     
-    '''
-    x_train, y_train = np.asarray(createArray(train_data))
-    x_valid, y_valid = np.asarray(createArray(val_data))
-    x_test, y_test = np.asarray(createArray(test_data))
-    '''
     return x_train, y_train, x_valid, y_valid, x_test, y_test

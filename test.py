@@ -30,7 +30,7 @@ TF_CPP_MIN_LOG_LEVEL=2
 from model import ModelIdol
 from data_handler import get_data
 
-print("It starts!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1")
+print("It starts------------------------------------------------------------------------------------")
 
 def plot_confusion_matrix(cm, classes, normalize=True, title='Confusion matrix', cmap=plt.cm.Blues):
     """
@@ -99,7 +99,7 @@ def test(dataset, ckpt):
         #if img not in None:
         images.append(img)
         labels.append('0')
-
+    
     # image = np.array(image)
     '''
     prediction = model.predict_image(images, labels, 1)
@@ -117,11 +117,20 @@ def test(dataset, ckpt):
     # Evaluate all the dataset
     images = np.array(images)
     labels = np.array(labels)
-    loss, acc, predicted_class = model.evaluate_dataset(images, labels)
+    # print("X type at test call : ", type(images))
+    # print("Y type at test call : ", type(labels))
+    loss, acc, predicted_class = model.evaluate_dataset(X_test, y_test)
+    prediction = model.predict_image(images, labels)
     
-    print("Accuracy = ", acc)
-    print("Loss = ", loss)
-    print("Predicted class = ", predicted_class)
+    # print("Accuracy = ", acc)
+    # print("Loss = ", loss)
+    # print("Predicted class = ", predicted_class)
+    
+    for name in prediction:
+        if name in id_to_name:
+            string = id_to_name[name]
+            print("All hail the program works, the image is a : ", string)
+    
     
     # Get the confusion matrix
     cnf_matrix = confusion_matrix(y_test, predicted_class)
@@ -131,7 +140,7 @@ def test(dataset, ckpt):
     plot_confusion_matrix(cnf_matrix, classes=[str(i) for i in range(5)], title='Confusion matrix, without normalization')
 
     plt.show()
-    
+       
 if __name__ == '__main__':
     arguments = docopt(__doc__)
     test(arguments["<dataset>"], arguments["<ckpt>"])

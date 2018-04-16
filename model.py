@@ -333,7 +333,7 @@ class ModelIdol(ModelBase):
 
         return loss, accuracy, predicted_class
     
-    def predict_image(self, images, labels, batch_size = 1): # To evaluate a single image passed on to this
+    def predict_image(self, images, labels, batch_size = 2): # To evaluate a single image passed on to this
         """
             Evaluate a single image
             *input: **
@@ -342,32 +342,42 @@ class ModelIdol(ModelBase):
             *return: **
                 *predicted_class: Predicted class
         """
-        tensors = [self.tf_loss_squared_rec, self.tf_correct_prediction, self.tf_predicted_class]
+        tensors = [self.tf_loss_squared_rec, self.tf_correct_prediction,
+                   self.tf_predicted_class]
 
         loss_squared_rec_list = None
+        # margin_loss_sum_list = None
         correct_prediction_list = None
         predicted_class = None
- 
+
         b = 0
-        for batch in self.get_images([images, labels], batch_size, shuffle=False):
-            image_batch, label_batch = batch
+        for batch in self.get_batches([images, labels], batch_size, shuffle=False):
+            images_batch, labels_batch = batch
             loss_squared_rec, correct_prediction, classes = self.sess.run(tensors,
                 feed_dict={
-                self.tf_images: image_batch,
-                self.tf_labels: label_batch,
+                self.tf_images: images_batch,
+                self.tf_labels: labels_batch,
                 self.tf_conv_2_dropout: 1.
             })
             if loss_squared_rec_list is not None:
                 predicted_class = np.concatenate((predicted_class, classes))
                 loss_squared_rec_list = np.concatenate((loss_squared_rec_list, loss_squared_rec))
+                # margin_loss_sum_list = np.concatenate((margin_loss_sum_list, margin_loss_sum))
                 correct_prediction_list = np.concatenate((correct_prediction_list, correct_prediction))
             else:
                 predicted_class = classes
                 loss_squared_rec_list = loss_squared_rec
+                # margin_loss_sum_list = margin_loss_sum
                 correct_prediction_list = correct_prediction
             b += batch_size
 
-        return predicted_class 
+        # margin_loss = np.mean(margin_loss_sum_list)
+        reconstruction_loss = np.mean(loss_squared_rec_list)
+        accuracy = np.mean(correct_prediction_list)
+
+        # loss = margin_loss
+
+        return predicted_class
 
 if __name__ == '__main__':
     model_idol = ModelIdol("test", output_folder=None)
