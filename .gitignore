@@ -2,9 +2,15 @@
 __pycache__/
 *.py[cod]
 *$py.class
+.vscode/
+.tmp.drivedownload/
 
 outputs/*
-dataset/*
+GTSRBdataset/*
+HOG/*
+Old/*
+ckpt_pp1/*
+
 
 # C extensions
 *.so
