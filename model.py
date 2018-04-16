@@ -372,8 +372,8 @@ class ModelIdol(ModelBase):
             b += batch_size
 
         # margin_loss = np.mean(margin_loss_sum_list)
-        reconstruction_loss = np.mean(loss_squared_rec_list)
-        accuracy = np.mean(correct_prediction_list)
+        # reconstruction_loss = np.mean(loss_squared_rec_list)
+        # accuracy = np.mean(correct_prediction_list)
 
         # loss = margin_loss
 
