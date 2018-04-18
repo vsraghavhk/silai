@@ -7,7 +7,6 @@ import os
 def obtain():
     ckpt = "outputs/checkpoints/c1s_9_c1n_256_c2s_6_c2n_64_c2d_0.7_c1vl_16_c1s_5_c1nf_16_c2vl_32_lr_0.0001_rs_1--Idols--1523697220.148633"
     result = test(ckpt)
-    print(result[1])
     return result[1]
 
 def test(ckpt):
@@ -19,13 +18,23 @@ def test(ckpt):
     labels = []
     for filename in os.listdir (folder):
         img = cv2.imread(os.path.join(folder, filename))
-        #if img not in None:
+        img = cv2.resize(img, (32, 32))
         images.append(img)
         labels.append('0')
-    images = np.array(images)
+    # Indian Jugaad
+    images = np.array(images) 
     labels = np.array(labels)
 
     prediction = model.predict_image(images, labels)
+    #'''
+    with open("signnames.csv", "r") as f:
+        signnames = f.read()
+    id_to_name = { int(line.split(",")[0]):line.split(",")[1] for line in signnames.split("\n")[1:] if len(line) > 0}
+    if prediction[0] in id_to_name:
+        string = id_to_name[prediction[0]]
+    print("The image is : ", string)
+    #'''
     return prediction
 
-obtain()
+if __name__ == '__main__':
+    obtain()

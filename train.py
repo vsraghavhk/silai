@@ -55,8 +55,10 @@ def train(dataset, ckpt=None, output=None):
         image = Image.fromarray(image.astype('uint8'), 'RGB')
         image = ImageEnhance.Brightness(image).enhance(random.uniform(0.5, 1.5))
         image = ImageEnhance.Contrast(image).enhance(random.uniform(0.5, 1.5))
+        '''
+        Make CAnny edge output back into 3 channels. see if training gives better results =======================================
+        '''
         """
-        
         gray = cv2.cvtColor(np.uint8(img), cv2.COLOR_BGR2GRAY)	
             # Converts image to Grayscale,              1 channel 256 level 
         image = cv2.Canny(np.uint8(gray), 150, 450) # Arbitrary threshold value

@@ -81,12 +81,6 @@ def test(dataset, ckpt):
     _, _, _, _, X_test, y_test = get_data(dataset)
     X_test = X_test / 255
     
-    # print("X shape at test : ", X_test.shape)
-    # print("Y shape at test : ", y_test)
-    # y_test = np.array(y_test)
-    # y_test.reshape((y_test[0].shape, 1))
-    # print("Y shape after reshape : ", y_test.shape)
-
     model = ModelIdol("Idols", output_folder=None)
     # Load the model
     model.load(ckpt)
@@ -100,11 +94,12 @@ def test(dataset, ckpt):
         images.append(img)
         labels.append('0')
     
-    # image = np.array(image)
+    # In case you wanna print prediction, 
+    #   uncomment the commented, 
+    #       and comment the rest of the method
     '''
     prediction = model.predict_image(images, labels, 1)
     
-    # prediction = 3
     string = "Jk, I don't know what this is. ._."
     print(id_to_name)
     if prediction in id_to_name:
