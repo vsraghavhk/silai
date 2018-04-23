@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="white_0">#ffffff</color>
+
+    <color name="grey_100">#F5F5F5</color>
+    <color name="grey_600">#757575</color>
+
+    <color name="cool_gray_30">#9fa7a7</color>
+    <color name="cool_gray_50">#6f7878</color>
+    <color name="cool_gray_70">#424747</color>
+    <color name="cool_gray_80">#343334</color>
+
+    <color name="ultramarine_50">#3c6df0</color>
+
+</resources>
