@@ -5,7 +5,7 @@ from werkzeug.wrappers import Request, Response
 import os
 
 UPLOAD_FOLDER = 'C:/Users/vsrag/Documents/Projects, Papers and Presentations/SILAI/Programs/uploads'
-ALLOWED_EXTENSIONS = set(['png;', 'jpg','jpeg'])
+ALLOWED_EXTENSIONS = set(['png;', 'jpg', 'jpeg'])
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
