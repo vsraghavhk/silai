@@ -34,14 +34,18 @@ def get_data(folder):
     with open(testing_file, mode='rb') as f:
         test = pickle.load(f)
 
-    # Retrive all datas
+    ''' # Custom Dataset
+    
     x_train, y_train = train[0], train[1]
     x_valid, y_valid = valid[0], valid[1]
     x_test, y_test = test[0], test[1]
-    # print("X shape at data handler : ", x_test.shape)
-    # print("Y shape at data handler : ", y_test.shape)
-    # print("X type at data handler : ", type(x_test))
-    # print("Y type at data handler : ", type(y_test))
-
+    
+    ''' # GTSRB dataset
+    
+    x_train, y_train = train['features'], train['labels']
+    x_valid, y_valid = valid['features'], valid['labels']
+    x_test, y_test = test['features'], test['labels']
+    
+    #'''
     
     return x_train, y_train, x_valid, y_valid, x_test, y_test
