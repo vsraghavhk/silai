@@ -1,0 +1,8 @@
+keras
+tensorflow-gpu
+Flask
+boto3
+imutils
+opencv-python
+pillow
+docopt
